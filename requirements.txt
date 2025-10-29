@@ -4,4 +4,4 @@ django-allauth==66.6.0
 djangorestframework==3.15.2
 psycopg2-binary==2.9.10
 gunicorn==23.0.0
-
+1111111
