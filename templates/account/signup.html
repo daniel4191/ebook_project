@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}소셜 회원가입 | Ebook 플랫폼{% endblock %}
+{% block content %}
+<div class="container" style="max-width:560px;">
+    <h1 style="margin-bottom:1rem;">소셜 회원가입</h1>
+    <p>소셜 계정에서 전달된 이메일로 가입이 진행됩니다.</p>
+    <p>문제가 있으면 <a href="{% url 'users:signup' %}">일반 회원가입</a>을 이용하세요.</p>
+</div>
+{% endblock %}

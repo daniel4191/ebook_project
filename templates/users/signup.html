@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}회원가입 | Ebook 플랫폼{% endblock %}
+{% block content %}
+<div class="container" style="max-width:560px;">
+    <h1 style="margin-bottom:1rem;">회원가입</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary" style="margin-top:.5rem;">가입하기</button>
+    </form>
+    <div style="margin-top:1rem;">
+        <a href="{% url 'users:login' %}">이미 계정이 있으신가요? 로그인</a>
+    </div>
+</div>
+{% endblock %}

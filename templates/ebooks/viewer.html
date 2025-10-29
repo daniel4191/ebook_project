@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}전자책 뷰어 | Ebook 플랫폼{% endblock %}
+{% block content %}
+<div class="container" style="max-width:960px;">
+    <h1 style="margin-bottom:1rem;">{{ ebook.title }}</h1>
+    <div style="border:1px solid #eee;border-radius:8px;padding:16px;min-height:320px;background:#fafafa;">
+        전자책 콘텐츠를 이 영역에 렌더링합니다.
+    </div>
+</div>
+{% endblock %}

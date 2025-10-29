@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}포스트 상세 | Ebook 플랫폼{% endblock %}
+{% block content %}
+<div class="container" style="max-width:840px;">
+    <a href="{% url 'posts:list' %}">← 목록으로</a>
+    <h1 style="margin: .5rem 0 1rem;">{{ post.title }}</h1>
+    <div style="color:#666;margin-bottom:1rem;">조회수 {{ post.view_count }}</div>
+    <div style="border:1px solid #eee;border-radius:8px;padding:16px;min-height:120px;">
+        {{ post.content|linebreaks }}
+    </div>
+    <div style="margin-top:1rem;display:flex;gap:8px;">
+        {% if request.user == post.author %}
+            <a class="btn btn-secondary" href="{% url 'posts:update' post.pk %}">수정</a>
+            <form method="post" action="{% url 'posts:delete' post.pk %}">
+                {% csrf_token %}
+                <button class="btn btn-primary" type="submit">삭제</button>
+            </form>
+        {% endif %}
+    </div>
+
+    <h2 style="margin:2rem 0 1rem;">댓글</h2>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+        {% for comment in comments %}
+            <div style="border:1px solid #eee;border-radius:8px;padding:12px;">
+                <div style="font-weight:600;">{{ comment.author.username }}</div>
+                <div>{{ comment.content|linebreaks }}</div>
+                {% if request.user == comment.author %}
+                    <form method="post" action="{% url 'posts:comment_delete' comment.pk %}" style="margin-top:.5rem;">
+                        {% csrf_token %}
+                        <button class="btn btn-secondary" type="submit">삭제</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>댓글이 없습니다.</p>
+        {% endfor %}
+    </div>
+
+    {% if request.user.is_authenticated %}
+        <h3 style="margin:1rem 0 .5rem;">댓글 작성</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary" type="submit">등록</button>
+        </form>
+    {% else %}
+        <p><a href="{% url 'users:login' %}">로그인</a> 후 댓글을 작성할 수 있습니다.</p>
+    {% endif %}
+</div>
+{% endblock %}

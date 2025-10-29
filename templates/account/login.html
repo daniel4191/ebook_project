@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+{% block title %}로그인 | Ebook 플랫폼{% endblock %}
+{% block content %}
+<div class="container" style="max-width:560px;">
+    <h1 style="margin-bottom:1rem;">소셜 로그인</h1>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+        <a class="btn btn-primary" href="/accounts/google/login/">Google로 계속</a>
+        <a class="btn btn-primary" href="/accounts/kakao/login/">Kakao로 계속</a>
+        <a class="btn btn-primary" href="/accounts/naver/login/">Naver로 계속</a>
+    </div>
+    <div style="margin-top:1rem;">
+        <a href="{% url 'users:login' %}">이메일로 로그인</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}로그인 | Ebook 플랫폼{% endblock %}
+{% block content %}
+<div class="container" style="max-width:560px;">
+    <h1 style="margin-bottom:1rem;">로그인</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary" style="margin-top:.5rem;">로그인</button>
+    </form>
+    <div style="margin-top:1rem;">
+        <a href="/accounts/login/">소셜 로그인으로 계속</a>
+    </div>
+    <div style="margin-top:.5rem;">
+        <a href="{% url 'users:signup' %}">회원가입</a>
+    </div>
+</div>
+{% endblock %}

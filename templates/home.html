@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}홈 | Ebook 플랫폼{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 style="margin-bottom: 1rem;">최근 포스트</h1>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px;">
+        {% for post in latest_posts %}
+            <div style="border: 1px solid #eee; border-radius: 8px; padding: 16px;">
+                <h3 style="margin-bottom: .5rem;">{{ post.title }}</h3>
+                <p style="color:#666; font-size:.9rem; margin-bottom: .75rem;">조회수 {{ post.view_count }}</p>
+                <a class="btn btn-primary" href="{% url 'posts:detail' post.pk %}">자세히 보기</a>
+            </div>
+        {% empty %}
+            <p>등록된 포스트가 없습니다.</p>
+        {% endfor %}
+    </div>
+
+    <h1 style="margin: 2rem 0 1rem;">최신 전자책</h1>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px;">
+        {% for ebook in latest_ebooks %}
+            <div style="border: 1px solid #eee; border-radius: 8px; padding: 16px;">
+                <h3 style="margin-bottom: .5rem;">{{ ebook.title }}</h3>
+                <p style="color:#666; font-size:.9rem; margin-bottom: .75rem;">가격 {{ ebook.price }}원</p>
+                <a class="btn btn-primary" href="{% url 'ebooks:detail' ebook.pk %}">상세보기</a>
+            </div>
+        {% empty %}
+            <p>등록된 전자책이 없습니다.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

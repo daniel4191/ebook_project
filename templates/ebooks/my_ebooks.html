@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}내 전자책 | Ebook 플랫폼{% endblock %}
+{% block content %}
+<div class="container">
+    <h1 style="margin-bottom:1rem;">내 전자책</h1>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;">
+        {% for purchase in my_ebooks %}
+            <div style="border:1px solid #eee;border-radius:8px;padding:16px;">
+                <h3 style="margin-bottom:.5rem;">{{ purchase.ebook.title }}</h3>
+                <a class="btn btn-primary" href="{% url 'ebooks:viewer' purchase.ebook.pk %}">열람하기</a>
+            </div>
+        {% empty %}
+            <p>구매한 전자책이 없습니다.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

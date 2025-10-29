@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}전자책 구매 | Ebook 플랫폼{% endblock %}
+{% block content %}
+<div class="container" style="max-width:720px;">
+    <h1 style="margin-bottom:1rem;">구매 확인</h1>
+    <p>전자책: <strong>{{ ebook.title }}</strong></p>
+    <p>결제수단: {{ payment_method }}</p>
+    <p style="margin-bottom:1rem;">가격: {{ ebook.price }}원</p>
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">구매 확정</button>
+        <a class="btn btn-secondary" href="{% url 'ebooks:detail' ebook.pk %}">취소</a>
+    </form>
+</div>
+{% endblock %}

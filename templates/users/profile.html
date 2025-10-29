@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}내 정보 | Ebook 플랫폼{% endblock %}
+{% block content %}
+<div class="container" style="max-width:720px;">
+    <h1 style="margin-bottom:1rem;">내 정보</h1>
+    <div style="display:flex; gap:16px; align-items:center;">
+        {% if request.user.profile_image %}
+            <img src="{{ request.user.profile_image.url }}" alt="profile" style="width:96px;height:96px;object-fit:cover;border-radius:50%;"/>
+        {% else %}
+            <div style="width:96px;height:96px;border-radius:50%;background:#eee;display:flex;align-items:center;justify-content:center;">🙂</div>
+        {% endif %}
+        <div>
+            <p><strong>이메일:</strong> {{ request.user.email }}</p>
+            <p><strong>닉네임:</strong> {{ request.user.username }}</p>
+        </div>
+    </div>
+    <div style="margin-top:1rem;">
+        <a class="btn btn-primary" href="{% url 'users:edit_profile' %}">프로필 수정</a>
+    </div>
+</div>
+{% endblock %}

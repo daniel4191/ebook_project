@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}전자책 상세 | Ebook 플랫폼{% endblock %}
+{% block content %}
+<div class="container" style="max-width:840px;">
+    <a href="{% url 'ebooks:list' %}">← 목록으로</a>
+    <h1 style="margin:.5rem 0 1rem;">{{ ebook.title }}</h1>
+    <div style="color:#666;margin-bottom:1rem;">평점 {{ ebook.rating|default:0 }}</div>
+    <div style="border:1px solid #eee;border-radius:8px;padding:16px;min-height:120px;">
+        {{ ebook.description|linebreaks }}
+    </div>
+
+    <div style="margin-top:1rem;display:flex;gap:8px;">
+        {% if is_purchased %}
+            <a class="btn btn-primary" href="{% url 'ebooks:viewer' ebook.pk %}">열람하기</a>
+        {% else %}
+            <a class="btn btn-primary" href="{% url 'ebooks:purchase' ebook.pk %}">구매하기 ({{ ebook.price }}원)</a>
+        {% endif %}
+    </div>
+
+    <h2 style="margin:2rem 0 1rem;">리뷰</h2>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+        {% for review in reviews %}
+            <div style="border:1px solid #eee;border-radius:8px;padding:12px;">
+                <div style="font-weight:600;">{{ review.author.username }} · ★ {{ review.rating }}</div>
+                <div>{{ review.content|linebreaks }}</div>
+            </div>
+        {% empty %}
+            <p>리뷰가 없습니다.</p>
+        {% endfor %}
+    </div>
+
+    {% if request.user.is_authenticated %}
+        <div style="margin-top:1rem;">
+            <a class="btn btn-secondary" href="{% url 'ebooks:review_create' ebook.pk %}">리뷰 작성</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

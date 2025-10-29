@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}리뷰 작성 | Ebook 플랫폼{% endblock %}
+{% block content %}
+<div class="container" style="max-width:720px;">
+    <h1 style="margin-bottom:1rem;">리뷰 작성: {{ ebook.title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">등록</button>
+        <a class="btn btn-secondary" href="{% url 'ebooks:detail' ebook.pk %}">취소</a>
+    </form>
+</div>
+{% endblock %}

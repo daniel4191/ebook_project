@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}문의하기 | Ebook 플랫폼{% endblock %}
+{% block content %}
+<div class="container" style="max-width:720px;">
+    <h1 style="margin-bottom:1rem;">문의하기</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">보내기</button>
+    </form>
+</div>
+{% endblock %}
